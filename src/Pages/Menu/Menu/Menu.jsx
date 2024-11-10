@@ -1,10 +1,26 @@
-import menuImg from '../../../assets/menu/banner3.jpg'
-import PopularMenu from "../../Home/PopularMenu/PopularMenu";
+import menuImg from '../../../assets/menu/banner3.jpg';
+import dessertImg from '../../../assets/menu/dessert-bg.jpeg';
+import pizzaImg from '../../../assets/menu/pizza-bg.jpg';
+import saladImg from '../../../assets/menu/salad-bg.jpg';
+import soupImg from '../../../assets/menu/soup-bg.jpg';
+
+
 import { Helmet } from "react-helmet-async";
 import Cover from '../../Shared/Cover/Cover';
+import UseMenu from '../../../hooks/UseMenu';
+import SectionTitle from '../../../components/SectionTitle';
+import MenuCategory from '../MenuCategory/MenuCategory';
 
 
 const Menu = () => {
+    const [menu]=UseMenu();
+    const popularItem=menu.filter(item=>item.category === "popular")
+    const soup=menu.filter(item=>item.category === "soup")
+    const pizza=menu.filter(item=>item.category === "pizza")
+    const dessert=menu.filter(item=>item.category === "dessert")
+    
+    const salad=menu.filter(item=>item.category === "salad")
+    const offered=menu.filter(item=>item.category === "offered")
     return (
         <div>
         <Helmet>
@@ -12,8 +28,21 @@ const Menu = () => {
    
   </Helmet>
   <Cover img={menuImg} title='OUR MENU' details={'Would you like to try a dish?'}></Cover>
-  <PopularMenu></PopularMenu>
-        
+  <SectionTitle subHeading='---Dont miss---' heading='TODAYS OFFER'></SectionTitle>
+  {/* offerd category */}
+  <MenuCategory items={offered}></MenuCategory>
+  {/* dessert */}
+  <MenuCategory items={dessert} title='DESSERTS' details='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' coverImg={dessertImg}></MenuCategory>
+
+  {/* pizza */}
+  <MenuCategory items={pizza} title='PIZZA' details='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' coverImg={pizzaImg}></MenuCategory>
+
+  {/* slaad */}
+  <MenuCategory items={salad} title='SALAD' details='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' coverImg={saladImg}></MenuCategory>
+
+
+        {/* soup */}
+        <MenuCategory items={soup} title='SOUP' details='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.' coverImg={soupImg}></MenuCategory>
     </div>
     );
 };
